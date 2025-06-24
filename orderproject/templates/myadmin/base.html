@@ -201,7 +201,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">主要导航</li>
         <!-- 导航列表，你可以自行更改图标 -->
-        <li class="active"><a href="admin.html"><i class="fa fa-home"></i> <span>首页</span></a></li>
+        <li class="active"><a href="{% url 'myadmin_index' %}"><i class="fa fa-home"></i> <span>首页</span></a></li>
         
         <li><a href="{% url 'myadmin_user_index' 1 %}"><i class="fa fa-users"></i> <span>员工管理</span></a></li>
         <li><a href="shop.html"><i class="fa fa-sitemap"></i> <span>店铺管理</span></a></li>
@@ -217,7 +217,7 @@
           </ul>
         </li>
         <li><a href="orders.html"><i class="fa fa-shopping-cart"></i> <span>订单管理</span></a></li>
-        <li><a href="#"><i class="fa fa-user"></i> <span>账号管理</span></a></li>
+        <li><a href="#"><i class="fa fa-user"></i> <span>会员管理</span></a></li>
         <li><a href="#"><i class="fa fa-key"></i> <span>权限管理</span></a></li>
         <li><a href="#"><i class="fa fa-gear"></i> <span>系统配置</span></a></li>
         <li><a href="#"><i class="fa fa-unlock-alt"></i> <span>认证体系</span></a></li>
@@ -283,7 +283,7 @@
 <!-- 此处可以添加SimLoopl和FastClick插件，用于增强用户体验。 -->
 
 <script type="text/javascript">
-	/*
+	function doDel(url){
     Modal.confirm({
         msg: "确定要删除吗？",
         title: ' 信息提示',
@@ -291,10 +291,11 @@
         btncl:'取消'
       }).on(function (e){
         if(e){
-          Modal.alert({msg: "成功删除",title: ' 信息提示',btnok: '确定',btncl:'取消'});
+          window.location.href=url;
+          //Modal.alert({msg: "成功删除",title: ' 信息提示',btnok: '确定',btncl:'取消'});
         }
       });
-      */
+  }  
 </script>
 </body>
 </html>
