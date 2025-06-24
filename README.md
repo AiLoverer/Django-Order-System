@@ -258,3 +258,8 @@ http://localhost:8000/myadmin/
 ```
 
 ![login page](res/admin.png)
+
+# Database Import
+```
+在db文件夹中通过SQLyog执行SQL文件（osdb20200720.sql）导入数据即可
+```
