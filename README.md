@@ -248,13 +248,13 @@ USE_TZ = True
 在templates/myadmin/index/目录中创建一个首页模板文件index.html
 在templates/myadmin/目录中创建一个信息提示模板文件info.html
 ```
-## Run the server 
+# Run the server 
 ```
 python manage.py runserver
 ```
 # Access the Admin Page
 ```
-http://localhost:8000/admin/
+http://localhost:8000/myadmin/
 ```
 
 ![login page](res/admin.png)
