@@ -248,6 +248,11 @@ USE_TZ = True
 在templates/myadmin/index/目录中创建一个首页模板文件index.html
 在templates/myadmin/目录中创建一个信息提示模板文件info.html
 ```
+## Install Pillow
+from PIL import Image, ImageDraw, ImageFont
+```
+pip3 install Pillow
+```
 # Run the server 
 ```
 python manage.py runserver
@@ -262,4 +267,21 @@ http://localhost:8000/myadmin/
 # Database Import
 ```
 在db文件夹中通过SQLyog执行SQL文件（osdb20200720.sql）导入数据即可
+
 ```
+
+# Version Update
+&nbsp;&nbsp;&nbsp;&nbsp;每一个Tag代表一个阶段的功能开发、可以下载不同的Tag代码进行循序渐进的学习。
+## v0.1.0
+- 完成数据库搭建、数据导入和环境以及第三方插件的安装。
+- 完成前后端分离，前端使用AdminLTE模板，后端使用Django开发。
+- 完成基础框架的搭建，模块分为：myadmin、web、mobile。
+
+## v0.2.0
+- 完成用户CURD操作。
+
+## v0.3.0
+- 完成后台用户管理登录和登出操作。
+- 完成验证码功能。  
+  
+![login page](res/v0.3.0.登录和验证码.png)
