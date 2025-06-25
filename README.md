@@ -285,3 +285,9 @@ http://localhost:8000/myadmin/
 - 完成验证码功能。  
   
 ![login page](res/v0.3.0.登录和验证码.png)
+
+## v0.4.0
+- 完成店铺管理CURD相关功能。
+
+  
+![店铺管理](res/v0.4.0店铺管理.png)
