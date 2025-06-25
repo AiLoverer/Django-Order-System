@@ -14,7 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from myadmin.views import index, user, shop, category, product
+from myadmin.views import index, user, shop, category, product, member
 from django.urls import path
 
 urlpatterns = [
@@ -58,4 +58,10 @@ urlpatterns = [
     path('product/del/<int:pid>', product.delete, name="myadmin_product_del"),
     path('product/edit/<int:pid>', product.edit, name="myadmin_product_edit"),
     path('product/update/<int:pid>', product.update, name="myadmin_product_update"),
+
+    #会员管理路由
+    path('member/<int:pIndex>', member.index, name="myadmin_member_index"), #浏览会员
+    path('member/edit/<int:mid>', member.edit, name="myadmin_member_edit"),
+    path('member/update/<int:mid>', member.update, name="myadmin_member_update"),
+    path('member/del/<int:mid>', member.delete, name="myadmin_member_del"),
 ]
