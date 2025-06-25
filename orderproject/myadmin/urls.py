@@ -19,6 +19,13 @@ from django.urls import path
 
 urlpatterns = [
     path('', index.index, name='myadmin_index'),
+
+    # 后台管理员路由
+    path('login', index.login, name="myadmin_login"), #加载登录页面
+    path('dologin', index.dologin, name="myadmin_dologin"), #执行登录操作
+    path('logout', index.logout, name="myadmin_logout"), #执行退出操作
+    path('verify', index.verify, name="myadmin_verify"), #验证码
+
     #员工账号信息管理
     path('user/<int:pIndex>', user.index, name="myadmin_user_index"),#浏览信息
     path('user/add', user.add, name="myadmin_user_add"),             #加载添加表单
