@@ -11,18 +11,23 @@ def index(request):
 
 def webIndex(request):
     '''项目前台大堂点餐首页'''
-    return render(request,"web/index.html")
+    #将session中的菜品和类别信息获取并items转换，可实现for in的遍历
+    context = {'categorylist':request.session.get("categorylist",{}).items()}
+    return render(request,"web/index.html", context)
 
 def login(request):
     '''加载登录页面'''
-    return render(request,"web/login.html")
+    shoplist = Shop.objects.filter(status=1)
+    print(shoplist)
+    context = {'shoplist':shoplist}
+    return render(request,"web/login.html", context)
 
 def dologin(request):
     ''' 执行登陆操作 '''
     try:
         #执行是否选择店铺判断
-        # if request.POST['shop_id'] == '0':
-        #     return redirect(reverse('web_login')+"?errinfo=1")
+        if request.POST['shop_id'] == '0':
+            return redirect(reverse('web_login')+"?errinfo=1")
 
         #执行验证码的校验
         if request.POST['code'] != request.session['verifycode']:
@@ -41,35 +46,38 @@ def dologin(request):
                 print('登录成功')
                 #将当前登录成功的用户信息以webuser为key写入到session中
                 request.session['webuser'] = user.toDict()
-                
-                # #获取当前店铺信息
-                # shopob = Shop.objects.get(id=request.POST['shop_id'])
-                # request.session['shopinfo'] = shopob.toDict()
-                # #获取当前店铺中所有的菜品类别和菜品信息
-                # clist = Category.objects.filter(shop_id = shopob.id,status=1)
-                # categorylist = dict() #菜品类别（内含有菜品信息）
-                # productlist = dict() #菜品信息
-                # #遍历菜品类别信息
-                # for vo in clist:
-                #     c = {'id':vo.id,'name':vo.name,'pids':[]}
-                #     plist = Product.objects.filter(category_id=vo.id,status=1)
-                #     #遍历当前类别下的所有菜品信息
-                #     for p in plist:
-                #         c['pids'].append(p.toDict())
-                #         productlist[p.id]=p.toDict()
-                #     categorylist[vo.id] = c   
-                # #将上面的结果存入到session中
-                # request.session['categorylist'] = categorylist
-                # request.session['productlist'] = productlist
+
+                #获取当前店铺信息
+                shopob = Shop.objects.get(id=request.POST['shop_id'])
+                request.session['shopinfo'] = shopob.toDict()
+                #获取当前店铺中所有的菜品类别和菜品信息
+                clist = Category.objects.filter(shop_id = shopob.id,status=1)
+                categorylist = dict() #菜品类别（内含有菜品信息）
+                productlist = dict() #菜品信息
+                #遍历菜品类别信息
+                for vo in clist:
+                    c = {'id':vo.id,'name':vo.name,'pids':[]}
+                    plist = Product.objects.filter(category_id=vo.id,status=1)
+                    #遍历当前类别下的所有菜品信息
+                    for p in plist:
+                        c['pids'].append(p.toDict())
+                        productlist[p.id]=p.toDict()
+                    categorylist[vo.id] = c
+                #将上面的结果存入到session中
+                request.session['categorylist'] = categorylist
+                request.session['productlist'] = productlist
                 
                 #重定向到前台大堂点餐首页
                 return redirect(reverse("web_index"))
             else:
+                # 登录密码错误
                 return redirect(reverse('web_login')+"?errinfo=5")
         else:
+            # 此用户非管理账号
             return redirect(reverse('web_login')+"?errinfo=4")
     except Exception as err:
         print(err)
+        # 登录账号不存在！
         return redirect(reverse('web_login')+"?errinfo=3")
 
 def logout(request):
