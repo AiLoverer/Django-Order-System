@@ -15,8 +15,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from web.views import index
-from django.urls import path
+from django.urls import include, path
 
 urlpatterns = [
-    path('', index.index, name="web_index"),
+    path('', index.index, name="index"), #前台大堂点餐首页
+
+    # 前台管理员路由
+    path('login', index.login, name="web_login"),
+    path('dologin', index.dologin, name="web_dologin"),
+    path('logout', index.logout, name="web_logout"),
+    path('verify', index.verify, name="web_verify"), #验证码
+
+    path('web/',include([
+        path('', index.webIndex, name="web_index"), #前台大堂点餐首页
+
+    ]))
 ]
