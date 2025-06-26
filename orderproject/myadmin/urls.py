@@ -64,4 +64,5 @@ urlpatterns = [
     path('member/edit/<int:mid>', member.edit, name="myadmin_member_edit"),
     path('member/update/<int:mid>', member.update, name="myadmin_member_update"),
     path('member/del/<int:mid>', member.delete, name="myadmin_member_del"),
+    path('member/resetpwd/<int:mid>', member.resetpwd, name="myadmin_member_resetpwd"), #重置密码
 ]

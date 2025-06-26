@@ -3,6 +3,7 @@ from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 from myadmin.models import Member
 import time
@@ -14,10 +15,18 @@ import os
 def index(request,pIndex=1):
     mod = Member.objects
 
-    list = mod.filter(status__lt=9)
+    mlist = mod.filter(status__lt=9)
+    mywhere=[]
+    #获取并判断搜索条件
+    kw = request.GET.get("keyword",None)
+    print(kw)
+    if kw:
+        mlist = mlist.filter(Q(nickname__contains=kw) | Q(mobile__contains=kw))
+        mywhere.append('keyword='+kw)
+
     #执行分页处理
     pIndex = int(pIndex)
-    page = Paginator(list,5) #以5条每页创建分页对象
+    page = Paginator(mlist,5) #以5条每页创建分页对象
     maxpages = page.num_pages #最大页数
     #判断页数是否越界
     if pIndex > maxpages:
@@ -28,7 +37,7 @@ def index(request,pIndex=1):
     plist = page.page_range   #页码数列表
 
     #封装信息加载模板输出
-    context = {"memberlist":list2,'plist':plist,'pIndex':pIndex,'maxpages':maxpages}
+    context = {"memberlist":list2,'plist':plist,'pIndex':pIndex,'maxpages':maxpages,'mywhere':mywhere}
     return render(request,"myadmin/member/index.html",context)
 
 def edit(request,mid=0):
@@ -94,4 +103,27 @@ def delete(request,mid=0):
     except Exception as err:
         print(err)
         context = {'info':"删除失败！"}
+    return render(request,"myadmin/info.html",context)
+
+def resetpwd(request,mid=0):
+    '''重置密码'''
+    try:
+        ob = Member.objects.get(id=mid)
+
+        #获取密码并md5
+        import hashlib
+        import random
+        md5 = hashlib.md5()
+        n = random.randint(100000, 999999)
+        s = "123456" + str(n) 
+        md5.update(s.encode('utf-8'))
+        ob.password_hash = md5.hexdigest()
+        ob.password_salt = n
+        ob.status = 1
+        ob.update_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        ob.save()
+        context = {'info':"密码重置成功！"}
+    except Exception as err:
+        print(err)
+        context = {'info':"密码重置失败！"}
     return render(request,"myadmin/info.html",context)

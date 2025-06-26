@@ -32,7 +32,7 @@
                       </div>
                     </div>
                 </form>
-            </div>
+              </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
@@ -87,7 +87,7 @@
               <ul class="pagination pagination-sm no-margin pull-right">
                 <li><a href="{% url 'myadmin_product_index' pIndex|add:-1 %}?{{mywhere|join:'&'}}">&laquo;</a></li>
                 {% for p in plist %}
-                  <li {% if pIndex == p %}class="active"{% endif %}><a href="{% url 'myadmin_product_index' p %}">{{ p }}</a></li>
+                  <li {% if pIndex == p %}class="active"{% endif %}><a href="{% url 'myadmin_product_index' p %}?{{mywhere|join:'&'}}">{{ p }}</a></li>
                 {% endfor %}
                 <li><a href="{% url 'myadmin_product_index' pIndex|add:1 %}?{{mywhere|join:'&'}}">&raquo;</a></li>
               </ul>
