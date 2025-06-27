@@ -14,7 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from web.views import index
+from web.views import index, cart
 from django.urls import include, path
 
 urlpatterns = [
@@ -28,6 +28,11 @@ urlpatterns = [
 
     path('web/',include([
         path('', index.webIndex, name="web_index"), #前台大堂点餐首页
+
+        path('cart/add/<str:pid>', cart.add, name="web_cart_add"), #添加购物车
+        path('cart/delete/<str:pid>', cart.delete, name="web_cart_delete"), #删除购物车
+        path('cart/clear', cart.clear, name="web_cart_clear"), #清空购物车
+        path('cart/change', cart.change, name="web_cart_change"), #修改购物车
 
     ]))
 ]

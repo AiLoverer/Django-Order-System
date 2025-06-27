@@ -11,6 +11,12 @@ def index(request):
 
 def webIndex(request):
     '''项目前台大堂点餐首页'''
+    #获取购物车列表信息
+    cartlist = request.session.get("cartlist",{})
+    total_money = 0
+    for vo in cartlist.values():
+        total_money += vo['price']*vo['num']
+    request.session['total_money'] = total_money
     #将session中的菜品和类别信息获取并items转换，可实现for in的遍历
     context = {'categorylist':request.session.get("categorylist",{}).items()}
     return render(request,"web/index.html", context)
