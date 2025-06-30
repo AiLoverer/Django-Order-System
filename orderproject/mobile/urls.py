@@ -34,4 +34,5 @@ urlpatterns = [
     path('member/orders', member.orders, name="mobile_member_orders"), #加载会员中心订单页
     path('member/detail', member.detail, name="mobile_member_detail"), #加载会员订单详情页
     path('member/logout', member.logout, name="mobile_member_logout"), #执行退出
+    
 ]

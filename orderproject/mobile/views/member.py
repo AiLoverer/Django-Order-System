@@ -19,4 +19,5 @@ def detail(request):
 
 def logout(request):
     '''执行会员退出'''
-    return render(request,"mobile/register.html")
+    del request.session['mobileuser']
+    return redirect(reverse('mobile_register'))
