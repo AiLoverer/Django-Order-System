@@ -192,9 +192,9 @@ exit
 ### Test root user connection with SQLyog or other tools
 Effict pictures:
 
-![test root user connection with SQLyog or other tools](res/connect.png)
-![test root user connection with SQLyog or other tools](res/test_connect.png)
-![test root user connection with SQLyog or other tools](res/login_database.png)
+![test root user connection with SQLyog or other tools](res/pictures/connect.png)
+![test root user connection with SQLyog or other tools](res/pictures/test_connect.png)
+![test root user connection with SQLyog or other tools](res/pictures/login_database.png)
 
 # Other Configuration
 
@@ -262,7 +262,7 @@ python manage.py runserver
 http://localhost:8000/myadmin/
 ```
 
-![login page](res/admin.png)
+![login page](res/pictures/admin.png)
 
 # Database Import
 ```
@@ -284,50 +284,50 @@ http://localhost:8000/myadmin/
 - 完成后台用户管理登录和登出操作。
 - 完成验证码功能。  
   
-![login page](res/v0.3.0.登录和验证码.png)
+![login page](res/pictures/v0.3.0.登录和验证码.png)
 
 ## v0.4.0
 - 完成店铺管理CURD相关功能。
 
 
-![店铺管理](res/v0.4.0店铺管理.png)
+![店铺管理](res/pictures/v0.4.0店铺管理.png)
 
 ## v0.5.0
 - 菜品管理CURD相关功能。
 
-![菜品管理](res/v0.5.0菜品管理-菜品分类.png)
+![菜品管理](res/pictures/v0.5.0菜品管理-菜品分类.png)
 
 ## v0.5.1
 - 完成菜品信息CURD相关功能。
 - 支持图片上传和修改。
   
-![菜品信息](res/v0.5.1菜品管理-菜品信息.png)
+![菜品信息](res/pictures/v0.5.1菜品管理-菜品信息.png)
 
 ## v0.6.0
 - 完成会员管理CURD相关功能。
 
-![会员管理](res/v0.6.0会员管理.png)
+![会员管理](res/pictures/v0.6.0会员管理.png)
 
 ## v0.6.1
 - 完成密码重置(仅函数实现，未完成数据库表创建)。
 - 完成搜索和页面分页。
-![搜索和分页](res/v0.6.1会员管理-分页.png)
+![搜索和分页](res/pictures/v0.6.1会员管理-分页.png)
 
 ## v0.7.0
 - 完成大堂点餐系统的基本框架搭建：引入web页面资源和index.html页面。
-![大堂点餐系统](res/v0.7.0%20web大堂点餐页面-基础搭建.png)
+![大堂点餐系统](res/pictures/v0.7.0%20web大堂点餐页面-基础搭建.png)
 
 ## v0.7.1
 - 完成大堂点餐系统的登录页面搭建。
-![大堂点餐系统](res/v0.7.1大堂点餐页面-登录.png)
+![大堂点餐系统](res/pictures/v0.7.1大堂点餐页面-登录.png)
 
 ## v0.7.2
 - 完成大堂点餐系统的菜品种类选择和现实。
-![大堂点餐系统](res/v0.7.2大堂点餐页面-菜单类别和菜品显示.png)
+![大堂点餐系统](res/pictures/v0.7.2大堂点餐页面-菜单类别和菜品显示.png)
 
 ## v0.7.3
 - 完成大堂点餐系统的购物车功能。
-![大堂点餐系统](res/v0.7.3大堂点餐页面-购物车.png)
+![大堂点餐系统](res/pictures/v0.7.3大堂点餐页面-购物车.png)
 
 ## v0.7.4
 - 完成大堂点餐系统的订单提交功能。
@@ -337,6 +337,11 @@ http://localhost:8000/myadmin/
 - 完成当前订单页面功能。
 - 完成历史订单页面功能。
 - 完成无效订单页面功能。
-![大堂点餐系统](res/v0.7.5大堂点餐页面-当前订单.png)
-![大堂点餐系统](res/v0.7.5大堂点餐页面-历史订单.png)
-![大堂点餐系统](res/v0.7.5大堂点餐页面-无效订单.png)
+![大堂点餐系统](res/pictures/v0.7.5大堂点餐页面-当前订单.png)
+![大堂点餐系统](res/pictures/v0.7.5大堂点餐页面-历史订单.png)
+![大堂点餐系统](res/pictures/v0.7.5大堂点餐页面-无效订单.png)
+
+## v0.8.0
+- 完成移动端点餐系统的基本框架搭建。  
+![移动端点餐系统](res/pictures/v0.8.0移动端页面-基础框架搭建1.png)
+![移动端点餐系统](res/pictures/v0.8.0移动端页面-基础框架搭建2.png)
