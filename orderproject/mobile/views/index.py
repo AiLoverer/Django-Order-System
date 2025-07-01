@@ -4,10 +4,15 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from datetime import datetime
 # Create your views here.
-from myadmin.models import Member
+from myadmin.models import Member,Shop
 
 def index(request):
     ''' 移动端首页 '''
+    #获取并判断当前店铺信息
+    shopinfo = request.session.get("shopinfo",None)
+    if shopinfo is None:
+        return redirect(reverse("mobile_shop")) #重定向到店铺选择页
+
     return render(request,"mobile/index.html")
 
 def register(request):
@@ -49,13 +54,21 @@ def doRegister(request):
 
 
 def shop(request):
-    ''' 移动端选择店铺页面 '''
-    return render(request,"mobile/shop.html")
+    ''' 呈现店铺选择页面 '''
+    context = {'shoplist':Shop.objects.filter(status=1)}
+    return render(request,"mobile/shop.html",context)
 
 def selectShop(request):
     ''' 移动端首页 '''
-    #return render(request,"mobile/index.html")
-    pass
+    #获取选择的店铺信息，并放置到session中
+    sid = request.GET['sid']
+    print(sid)
+    ob = Shop.objects.get(id=sid)
+    
+    request.session['shopinfo'] = ob.toDict()
+    print(request.session['shopinfo'])
+    #跳转到首页
+    return redirect(reverse("mobile_index"))
 
 def addOrders(request):
     ''' 移动端下单表单页'''
