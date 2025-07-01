@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from datetime import datetime
 # Create your views here.
-from myadmin.models import Member,Shop
+from myadmin.models import Member,Shop,Category,Product
 
 def index(request):
     ''' 移动端首页 '''
@@ -12,8 +12,18 @@ def index(request):
     shopinfo = request.session.get("shopinfo",None)
     if shopinfo is None:
         return redirect(reverse("mobile_shop")) #重定向到店铺选择页
-
-    return render(request,"mobile/index.html")
+    #获取当前店铺下的菜品类别和菜品信息
+    clist = Category.objects.filter(shop_id=shopinfo['id'],status=1)
+    productlist = dict()
+    
+    for vo in clist:
+        print('vo.id: '+ str(vo.id))
+        plist = Product.objects.filter(category_id=vo.id,status=1)
+        productlist[vo.id] = plist
+        for product in plist:
+            print(product.name + " " + str(product.price) + " " + str(product.category_id) )
+    context = {'categorylist':clist,'productlist':productlist.items(),'cid':clist[0]}
+    return render(request,"mobile/index.html",context)
 
 def register(request):
     ''' 移动端会员注册/登录表单 '''
