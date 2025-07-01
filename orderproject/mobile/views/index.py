@@ -76,10 +76,18 @@ def selectShop(request):
     ob = Shop.objects.get(id=sid)
     
     request.session['shopinfo'] = ob.toDict()
+    request.session['mobile_cartlist'] = {} #清空购物车
     print(request.session['shopinfo'])
     #跳转到首页
     return redirect(reverse("mobile_index"))
 
 def addOrders(request):
     ''' 移动端下单表单页'''
+    #尝试从session中获取名字为cartlist的购物车信息，若没有返回{}
+    cartlist = request.session.get('mobile_cartlist',{})
+    total_money = 0 #初始化一个总金额
+    #遍历购物车中的菜品并累加总金额
+    for vo in cartlist.values():
+        total_money += vo['num']*vo['price']
+    request.session['total_money'] = total_money #放进session
     return render(request,"mobile/addOrders.html")

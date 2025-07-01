@@ -14,7 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from mobile.views import index, member
+from mobile.views import index, member, cart
 from django.urls import path
 
 urlpatterns = [
@@ -28,6 +28,12 @@ urlpatterns = [
     path('shop/select', index.selectShop, name="mobile_selectshop"), #执行移动端店铺选择
     #订单处理
     path('orders/add', index.addOrders, name="mobile_addorders"), #加载移动端订单页
+
+    # 购物车信息管理路由配置
+    path('cart/add', cart.add, name="mobile_cart_add"),
+    path('cart/del', cart.delete, name="mobile_cart_del"),
+    path('cart/clear', cart.clear, name="mobile_cart_clear"),
+    path('cart/change', cart.change, name="mobile_cart_change"),
 
     #会员中心
     path('member', member.index, name="mobile_member_index"), #会员中心首页
