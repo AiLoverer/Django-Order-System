@@ -35,6 +35,10 @@ urlpatterns = [
     path('cart/clear', cart.clear, name="mobile_cart_clear"),
     path('cart/change', cart.change, name="mobile_cart_change"),
 
+    #订单处理
+    path('orders/add', index.addOrders, name="mobile_addorders"), #加载移动端订单页
+    path('orders/doadd', index.doAddOrders, name="mobile_doaddorders"), #执行移动端下单操作
+
     #会员中心
     path('member', member.index, name="mobile_member_index"), #会员中心首页
     path('member/orders', member.orders, name="mobile_member_orders"), #加载会员中心订单页

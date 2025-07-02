@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.core.paginator import Paginator
 from datetime import datetime
 
-from myadmin.models import User,Shop,Category,Product,Orders,OrderDetail,Payment
+from myadmin.models import Member, User,Shop,Category,Product,Orders,OrderDetail,Payment
 
 def index(request,pIndex=1):
     '''浏览订单信息'''
@@ -88,6 +88,12 @@ def index(request,pIndex=1):
         else:
             user = User.objects.only('nickname').get(id=vo.user_id)
             vo.nickname = user.nickname
+
+        if vo.member_id == 0:
+            vo.membername = "大堂顾客"
+        else:
+            member = Member.objects.only("mobile").get(id=vo.member_id)
+            vo.membername =  member.mobile
     #封装信息加载模板输出
     context = {"orderslist":list2,'plist':plist,'pIndex':pIndex,'maxpages':maxpages,'mywhere':mywhere,'url':request.build_absolute_uri()}
     return render(request,"web/list.html",context)
